@@ -4,4 +4,5 @@ build:
     - inferless-cli==2.0.9
     - hf-transfer==0.1.9
     - huggingface-hub==0.27.1
-    - llama-cpp-python==0.3.7
+  run:
+    - 'CMAKE_ARGS="-DGGML_CUDA=on" pip install llama-cpp-python==0.2.85'
