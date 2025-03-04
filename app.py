@@ -1,19 +1,14 @@
+import os
+os.environ["HF_HUB_ENABLE_HF_TRANSFER"]='1'
+from huggingface_hub import snapshot_download
 from llama_cpp import Llama
-from huggingface_hub import hf_hub_download
 import os
 
 class InferlessPythonModel:
     def initialize(self):
-        nfs_volume = os.getenv("NFS_VOLUME")
-        if os.path.exists(nfs_volume + "/Meta-Llama-3.1-8B-Instruct-Q8_0.gguf") == False :
-            cache_file = hf_hub_download(
-                                repo_id="bartowski/Meta-Llama-3.1-8B-Instruct-GGUF",
-                                filename="Meta-Llama-3.1-8B-Instruct-Q8_0.gguf",
-                                local_dir=nfs_volume)
-        self.llm = Llama(
-            model_path=f"{nfs_volume}/Meta-Llama-3.1-8B-Instruct-Q8_0.gguf",
-            main_gpu=0,
-            n_gpu_layers=-1)
+        repo_id="bartowski/Meta-Llama-3.1-8B-Instruct-GGUF"
+        snapshot_download(repo_id=model_id,allow_patterns=["Meta-Llama-3.1-8B-Instruct-Q8_0.gguf"])
+        self.llm = Llama.from_pretrained(repo_id=model_id,filename="Meta-Llama-3.1-8B-Instruct-Q8_0.gguf",main_gpu=0,n_gpu_layers=-1)
 
     def infer(self, inputs):
         prompt = inputs["prompt"]
