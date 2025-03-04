@@ -1,7 +1,6 @@
 build:
   cuda_version: "12.1.1"
   python_packages:
-    - inferless-cli==2.0.9
     - hf-transfer==0.1.9
     - huggingface-hub==0.27.1
   run:
