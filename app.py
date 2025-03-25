@@ -6,7 +6,7 @@ import os
 
 class InferlessPythonModel:
     def initialize(self):
-        repo_id="bartowski/Meta-Llama-3.1-8B-Instruct-GGUF"
+        model_id="bartowski/Meta-Llama-3.1-8B-Instruct-GGUF"
         snapshot_download(repo_id=model_id,allow_patterns=["Meta-Llama-3.1-8B-Instruct-Q8_0.gguf"])
         self.llm = Llama.from_pretrained(repo_id=model_id,filename="Meta-Llama-3.1-8B-Instruct-Q8_0.gguf",main_gpu=0,n_gpu_layers=-1)
 
